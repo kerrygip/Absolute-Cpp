@@ -1,0 +1,23 @@
+****SELF TEST EXERCISES****
+
+1. What is the difference between a (binary) operator and a function?
+A binary operator - takes two arguments and is overloaded. The arguments are isted before and after the operator. Has reserved word "operator"
+A binary function - takes two objects and is a base class. The arguments listed in parentheses after function name
+
+2. Suppose you wish to overload the operator < so that it applies to the type Money
+defined in Display 8.1. What do you need to add to the definition of Money
+given in Display 8.1?
+const Money operator <
+
+3. Is it possible using operator overloading to change the behavior of + on integers?
+Why or why not?
+Yes it is possible, as long as the overloading is done on at least one class type. If it's on two integers, then no. 
+
+4. Suppose you omit the const at the beginning of the declaration and definition
+of the overloaded plus operator for the class Money, so that the value is not
+returned by const value. Is the following legal?
+Money m1(10.99), m2(23.57), m3(12.34);
+(m1 + m2) = m3;
+Is it legal if the definition of the class Money is as shown in Display 8.1, so that
+the plus operator returns its value by const value?
+
