@@ -1,0 +1,365 @@
+Exam1 covers chapters 6-8, so they will also include my notes as well as self test exercises
+
+Struct tag are spelled with uppercase, identifiers declared inside of braces {}; are called member names. Ends with semicolon
+structure definition is also placed outside all function definitions and is a global definition
+
+Dot operator is used to specify a member vaariable of a structure variable
+int main()
+structure_name member_variable_name
+member_variable_name.structure member
+
+*****SELF TEST EXERCISES********
+1. Given the following structure and structure variable declaration:
+struct CDAccountV2
+{
+  double balance;
+  double interestRate;
+  int term;
+  char initial1;
+  char initial2;
+};
+
+CDAccountV2 account;
+
+what is the type of each of the following? Mark any that are not correct.
+  a. account.balance - > double
+  b. account.interestRate -> double
+  c. CDAccountV1.term - > illegal. Cannot use tag, can only use variable
+  d. account.initial2 -> char
+  e. account - > CDAccount V2/struct? 
+
+
+
+2. Consider the following type definition:
+struct ShoeType
+{
+  char style;
+  double price;
+};
+
+Given the previous structure-type definitions, what will be the output produced
+by the following code?
+ShoeType shoe1, shoe2;
+shoe1.style ='A';
+shoe1.price = 9.99;
+cout << shoe1.style << " $" << shoe1.price << endl;
+shoe2 = shoe1;
+shoe2.price = shoe2.price/9; <-- This is why the 2nd shows up 1.11
+cout << shoe2.style << " $" << shoe2.price << endl;
+
+A $9.99                                                                                                                                       
+A $1.11 
+
+
+3. What is the error in the following structure definition?
+struct Stuff
+{
+  int b;
+  int c;
+} <-- missing semicolon
+int main( )
+{
+  Stuff x;
+// other code
+}
+
+
+
+4. Given the following struct definition:
+struct A
+{
+  int b;
+  int c;
+};
+declare x to have this structure type. Initialize the members of x, member b and
+member c, to the values 1 and 2, respectively.
+
+#include<iostream>
+using namespace std; 
+
+struct A
+{
+  int b;
+  int c;
+};
+//declare x to have this structure type. Initialize the members of x, member b and
+//member c, to the values 1 and 2, respectively.
+
+int main(){
+A x;
+  x.b = 1;
+  x.c = 2;
+}
+A x = {1,2}
+
+5. Here is an initialization of a structure type. State what happens with each
+initialization. Note any problems with these initializations.
+struct Date
+{
+  int month;
+  int day;
+  int year;
+};
+  a. Date dueDate = {12, 21}; -> year = 0
+  b. Date dueDate = {12, 21, 1995}; -> fine
+  c. Date dueDate = {12, 21, 19, 95}; ->error, 4 inputs/ initializers 
+  
+6.   Write a definition for a structure type for records consisting of a person’s wage
+rate, accrued vacation (which is some whole number of days), and status (which
+is either hourly or salaried). Represent the status as one of the two char values
+'H' and 'S'. Call the type EmployeeRecord.
+
+#include<iostream>
+using namespace std; 
+
+struct records
+{
+  double wageRate;
+  int vacation;
+  char status; 
+};
+
+int main(){
+
+records EmployeeRecord;
+EmployeeRecord.wage = 1;
+EmployeeRecord.vacation = 2;
+EmployeeRecord.status = 12;
+}
+
+
+7. Give a function definition corresponding to the following function declaration.
+(The type ShoeType is given in Self-Test Exercise 2.)
+void readShoeRecord(ShoeType& newShoe);
+//Fills newShoe with values read from the keyboard.
+#include<iostream>
+using namespace std; 
+
+struct ShoeType
+{
+  char style;
+  double price;
+};
+
+int main(){
+
+    void readShoeRecord(ShoeType& newShoe);
+    cin>> newShoe.style; 
+    cin>> newShoe.price;
+}   
+
+
+
+8. Give a function definition corresponding to the following function declaration.
+(The type ShoeType is given in Self-Test Exercise 2.)
+ShoeType discount(ShoeType oldRecord);
+//Returns a structure that is the same as its argument,
+//but with the price reduced by 10%.
+
+#include<iostream>
+using namespace std; 
+
+struct ShoeType
+{
+  char style;
+  double price;
+};
+
+int main(){
+
+    ShoeType discount(ShoeType oldRecord)
+    {
+        ShoeType temp;
+        temp = oldRecord;
+        temp.style = oldRecord.style;
+        temp.price = 0.90* oldRecord.price;
+        return temp;
+    }
+}    
+//However there's an error: main.cpp: In function ‘int main()’:
+main.cpp:14:5: error: a function-definition is not allowed here before ‘{’ token
+     { 
+// This is the same as the answers so idfk
+
+
+9. Here we have redefined the class DayOfYear from Display 6.3 so that it now has
+one additional member function called input. Write an appropriate definition
+for the member function input.
+class DayOfYear
+{
+public:
+  void input( );
+  void output( );
+  int month;
+  int day;
+};
+
+int main(){
+  DayofYear date;
+  cout<<"What do you want input to be?"" << endl;
+  cin>> date.input;
+  
+}
+
+10. Given the following class definition, write an appropriate definition for the
+member function set.
+class Temperature
+{
+public:
+  void set(double newDegrees, char newScale);
+//Sets the member variables to the values given as
+//arguments.
+  double degrees;
+  char scale; //'F' for Fahrenheit or 'C' for Celsius.
+};
+
+int main(){
+  void Temperature::set(double newDegrees, char newScale)
+{
+  degrees = newDegrees;
+  scale = newScale;
+}  
+}
+
+
+
+11. Carefully distinguish between the meaning and use of the dot operator and the
+scope resolution operator, ::.
+dot operator : is used to tell what the member function is a member of, but used with objects or class variables
+scopte resolution operator : is used to tell what the member function is a member of, but used with classes
+
+
+
+
+// More notes from book
+Accessor functions allow you to read the data(use get)
+Mutator functions allow you to change the data (use set)
+
+12. Suppose your program contains the following class definition:
+class Automobile
+{
+public:
+  void setPrice(double newPrice);
+  void setProfit(double newProfit);
+  double getPrice( );
+private:
+  double price;
+  double profit;
+  double getProfit( );
+};
+and suppose the main function of your program contains the following
+declaration and that the program somehow sets the values of all the member
+variables to some values:
+
+Automobile hyundai, jaguar;
+
+Which of the following statements are then allowed in the main function of
+your program?
+hyundai.price = 4999.99; - illegal price is private
+jaguar.setPrice(30000.97); - coo
+double aPrice, aProfit; - coo
+aPrice = jaguar.getPrice( ); cool
+aProfit = jaguar.getProfit( ); no
+aProfit = hyundai.getProfit( ); no
+hyundai = jaguar; ok
+
+
+13. Suppose you change Self-Test Exercise 12 so that in the definition of the class
+Automobile all member variables are public instead of private. How would this
+change your answer to the question in Self-Test Exercise 12?
+yeah, if they were all public, then everything will be legal
+
+14. Explain what public: and private: mean in a class definition.
+private means that they data is not accessable, can only be accessed by name in the defintions of member functions of the same class
+public means fair game 
+
+15. How many public: sections are required in a class for the class to be useful? 1
+  b. How many private: sections are required in a class? 1
+
+
+//structures assume public members, classes assume private members 
+
+
+16. When you define a C++ class, should you make the member variables public or
+private? Should you make the member functions public or private?
+Member variables - variable
+Member functions - public
+
+class Class
+{
+public:
+	void memberFunction();
+private:
+	int memberVariable;
+};
+
+
+17. When you define a C++ class, what items are considered part of the interface?
+What items are considered part of the implementation?
+Interface - interface consists of two sorts of things: the comments, usually
+at the beginning of the class definition, that tell what the data of the object is supposed
+to represent and the public member functions of the class along with the comments that tell how to use
+these public member functions.
+
+Implementation - tells how the class interface is realized as C++ code.
+The implementation consists of the private members of the class and the definitions of
+both the public and private member functions.
+
+
+***PROGRAMMING PROJECTS ******
+
+1. Write a grading program for a class with the following grading policies:
+a. There are two quizzes, each graded on the basis of 10 points.
+b. There is one midterm exam and one final exam, each graded on the basis of
+100 points.
+c. The final exam counts for 50% of the grade, the midterm counts for 25%, and
+the two quizzes together count for a total of 25%. (Do not forget to normalize
+the quiz scores. They should be converted to a percentage before they are averaged
+in.)
+Any grade of 90 or more is an A, any grade of 80 or more (but less than 90) is a
+B, any grade of 70 or more (but less than 80) is a C, any grade of 60 or more (but
+less than 70) is a D, and any grade below 60 is an F. The program will read in the
+student’s scores and output the student’s record, which consists of two quiz and
+two exam scores as well as the student’s average numeric score for the entire course
+and final letter grade. Define and use a structure for the student record.
+2. Define a class for a type called CounterType. An object of this type is used to
+count things, so it records a count that is a nonnegative whole number. Include a
+mutator function that sets the counter to a count given as an argument. Include
+member functions to increase the count by one and to decrease the count by one.
+Be sure that no member function allows the value of the counter to become negative.
+Also, include a member function that returns the current count value and one
+that outputs the count. Embed your class definition in a test program.
+3. The type Point is a fairly simple data type, but under another name (the template
+class pair) this data type is defined and used in the C++ Standard Template Library,
+although you need not know anything about the Standard Template Library
+to do this exercise. Write a definition of a class named Point that might be used to
+store and manipulate the location of a point in the plane. You will need to declare
+and implement the following member functions:
+a. A member function set that sets the private data after an object of this class is
+created.
+b. A member function to move the point by an amount along the vertical and
+horizontal directions specified by the first and second arguments.
+c. A member function to rotate the point by 90 degrees clockwise around the
+origin.
+d. Two const inspector functions to retrieve the current coordinates of the point.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
