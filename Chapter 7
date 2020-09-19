@@ -1,0 +1,246 @@
+// NOTES
+A constructor is a member function(public) that is called when an object is declared
+
+
+1. Suppose your program contains the following class definition (along with
+definitions of the member functions):
+class YourClass
+{
+public:
+  YourClass(int newInfo, char moreNewInfo);
+  YourClass( );
+  void doStuff( );
+private:
+  int information;
+  char moreInformation;
+};
+
+Which of the following are legal?
+YourClass anObject(42, 'A'); legal
+YourClass anotherObject;  legal
+YourClass yetAnotherObject();  problem - should not have  ()
+anObject = YourClass(99, 'B');  legal
+anObject = YourClass( ); legal
+anObject = YourClass; illegal
+
+
+2. What is a default constructor? Does every class have a default constructor?
+A default constructor is a constructor that does not take any arguments
+not every class has a default, but if you don't declare one, it will be made for you
+if  you declare constructors, but made no default, then it will not be made 
+
+
+3. The function BankAccount::input in Display 7.2 reads the balance of the
+account as a value of type double. When the value is stored in the computer’s
+memory in binary form, this can create a slight error. It would normally
+not be noticed, and the function is good enough for the demonstration class
+BankAccount. Spending too much time on numerical analysis would detract
+from the message at hand. Still, this input function is not good enough for
+banking. Rewrite the function BankAccount::input so it reads an amount
+such as 78.96 as the int 76 and the three char values '.', '9', and '6'. You
+can assume the user always enters two digits for the cents in an amount, such as
+99.00 instead of just 99 and nothing more. Hint: The following formula will
+convert a digit to the corresponding int value, such as '6' to 6:
+
+static_cast<int>(digit) - static_cast<int>('0')
+
+
+void BankAccount::input( )
+{
+int dollars;
+char point, digit1, digit2;
+cout <<
+"Enter account balance (include cents even if .00) $";
+cin >> dollars;
+cin >> point >> digit1 >> digit2;
+accountDollars = dollars;
+accountCents = digitToInt(digit1)*10 + digitToInt(digit2);
+if (accountDollars < 0)
+accountCents = -accountCents;
+cout << "Enter interest rate (NO percent sign): ";
+cin >> rate;
+setRate(rate);
+}
+int BankAccount::digitToInt(char digit)
+{
+return (static_cast<int>(digit) - static_cast<int>('0'));
+}
+
+
+4. Why would it be incorrect to add the modifier const, as shown next, to the
+declaration for the member function input of the class BankAccount given in
+Display 7.2?
+class BankAccount
+{
+public:
+  void input( ) const;
+};
+
+You don't constant something that is input, just set variables that aren't supposed to change
+
+5. 5. What are the differences and the similarities between a call-by-value parameter and
+a constant call-by-reference parameter? Declarations that illustrate these follow.
+void callByValue(int x); 
+void callByConstReference(const int& x); call by reference is memory efficient 
+same: 
+
+
+6. Consider the following definitions:
+const int x = 17;
+class A
+{
+public:
+  A( );
+  A(int n);
+  int f( )const;
+  int g(const A& x);
+  private:
+int i;
+};
+
+Each of the three const keywords is a promise to the compiler that the compiler
+will enforce. What is the promise in each case?
+
+The promise that the numbers won't change
+
+7. Rewrite the definition of the class DayOfYear given in Display 7.3 so that the
+functions getMonthNumber and getDay are defined inline.
+
+//  Static variables is a variable that is shared by all objects of a class 
+
+class DayOfYear
+{
+public:
+  DayOfYear(int monthValue, int dayValue);
+  DayOfYear(int monthValue);
+  DayOfYear( );
+  void input( );
+  void output( );
+  int getMonthNumber( ) { return month; }
+  int getDay( ) { return day; }
+private:
+  int month;
+  int day;
+  void testDate( );
+};
+
+8. Could the function defined as follows be added to the class Server in
+Display 7.6 as a static function? Explain your answer.
+void Server::showStatus( )
+{
+  cout << "Currently serving " << turn << endl;
+  cout << "server name " << name << endl;
+}
+No its not static since you have to call "name" 
+
+
+9. Is the following program legal? If so, what is the output?
+#include <iostream>
+#include <vector>
+using namespace std;
+int main( )
+{
+  vector<int> v(10);
+  int i;
+  for (i = 0; i < v.size( ); i++)
+    v[i] = i;
+  vector<int> copy;
+  copy = v;
+  v[0] = 42;
+  for (i = 0; i < copy.size( ); i++)
+    cout << copy[i] << " ";
+  cout << endl;
+  return 0;
+}
+
+Legal : 0 1 2 3 4 5 6 7 8 9
+
+10. What is the difference between the size and the capacity of a vector?
+size of a vector: is the number of elements in a vector
+capactiy of a vector: capacity is the number of elements for which it currently has memory allocated
+
+
+
+
+
+****PROGRAMMING PROJECTS******
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
