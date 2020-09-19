@@ -21,3 +21,6 @@ Money m1(10.99), m2(23.57), m3(12.34);
 Is it legal if the definition of the class Money is as shown in Display 8.1, so that
 the plus operator returns its value by const value?
 
+
+5. Complete the definition of the member binary operator in Display 8.2.
+
